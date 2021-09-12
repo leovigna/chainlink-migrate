@@ -1,8 +1,4 @@
-import Example from '../truffle/Example';
-
-export const contracts = {
-    Example: Example,
-};
+export const contracts = {};
 export type ContractName = keyof typeof contracts;
 
 //patch mock artifacts object for backwards-compatibility

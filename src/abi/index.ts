@@ -1,3 +1,3 @@
-import * as Example from './Example.json';
+import * as ERC677FixedSupply from './ERC677FixedSupply.json';
 
-export { Example };
+export { ERC677FixedSupply };

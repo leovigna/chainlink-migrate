@@ -88,5 +88,9 @@
         "lib/web3"
     ],
     "main": "lib/index.js",
-    "types": "lib/index.d.ts"
+    "types": "lib/index.d.ts",
+    "dependencies": {
+        "@chainlink/contracts": "^0.2.1",
+        "@openzeppelin/contracts": "^4.3.1"
+    }
 }
