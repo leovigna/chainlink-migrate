@@ -1,5 +1,5 @@
-import { ERC677FixedSupplyContract as ContractInterface } from '../types/truffle/ERC677FixedSupply';
-import Artifact from '../abi/ERC677FixedSupply.json';
+import { OracleTestConsumerContract as ContractInterface } from '../types/truffle/OracleTestConsumer';
+import Artifact from '../abi/OracleTestConsumer.json';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const Contract = require('@truffle/contract');

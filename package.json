@@ -1,12 +1,12 @@
 {
-    "name": "@leovigna/solidity-starter",
+    "name": "@leovigna/chainlink-migrate",
     "version": "0.1.3",
     "private": false,
     "repository": {
         "type": "git",
-        "url": "https://github.com/leovigna/solidity-starter.git"
+        "url": "https://github.com/leovigna/chainlink-migrate.git"
     },
-    "homepage": "https://leovigna.github.io/solidity-starter",
+    "homepage": "https://leovigna.github.io/chainlink-migrate",
     "copyright": "Copyright 2021 Leo Vigna",
     "author": {
         "name": "Leo Vigna",
@@ -25,6 +25,7 @@
         "compile": "npm-run-all compile:truffle generate-types copy compile:tsc",
         "compile:truffle": "truffle compile",
         "compile:tsc": "tsc",
+        "compile:tsc:watch": "tsc --watch",
         "copy": "npm-run-all -p copy:solidity copy:ethers copy:truffle copy:web3",
         "copy:solidity": "mkdir -p lib/solidity && cp -r src/solidity lib/",
         "copy:ethers": "mkdir -p lib/types/ethers && cp -r src/types/ethers/*.d.ts lib/types/ethers",
@@ -35,7 +36,7 @@
         "generate-types:truffle": "typechain --target=truffle-v5 --out-dir=src/types/truffle 'src/abi/*.json'",
         "generate-types:web3": "typechain --target=web3-v1 --out-dir=src/types/web3 'src/abi/*.json'",
         "generate-types:ethers": "typechain --target=ethers-v5 --out-dir=src/types/ethers 'src/abi/*.json'",
-        "ganache": "ganache-cli -l 8500000",
+        "ganache": "ganache-cli -b 1 --networkId 1337 --chainId 1337 -m 'repair trade mobile pizza exclude mirror present mad buyer item impose during'",
         "docs": "solidity-docgen -i src/solidity -o docs"
     },
     "devDependencies": {
@@ -63,7 +64,7 @@
         "ethers": "^5.4.4",
         "ganache-cli": "^6.12.2",
         "ganache-core": "^2.13.2",
-        "husky": "^7.0.1",
+        "husky": "^7.0.2",
         "lint-staged": "^11.1.2",
         "lodash": "^4.17.21",
         "mocha": "^9.0.3",
@@ -76,9 +77,9 @@
         "truffle-assertions": "^0.9.2",
         "typechain": "^5.1.2",
         "typescript": "^4.3.5",
-        "web3": "^1.5.1",
+        "web3": "^1.5.2",
         "web3-core": "^1.5.1",
-        "web3-eth-contract": "^1.5.1"
+        "web3-eth-contract": "^1.5.2"
     },
     "files": [
         "lib/solidity/**/!(Test*)",
@@ -91,6 +92,9 @@
     "types": "lib/index.d.ts",
     "dependencies": {
         "@chainlink/contracts": "^0.2.1",
-        "@openzeppelin/contracts": "^4.3.1"
+        "@leovigna/web3-prompt": "^0.1.1",
+        "@openzeppelin/contracts": "^4.3.1",
+        "@truffle/hdwallet-provider": "^1.5.0",
+        "inquirer": "^8.1.2"
     }
 }
