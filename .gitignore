@@ -1,3 +1,7 @@
+data/ganache
+data/postgres
+src/solidity2
+
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 # build output
 build/
@@ -24,7 +28,9 @@ yarn.lock
 
 # misc
 .DS_Store
-.env
+!.env
+.env.*
+!/chainlink/.env
 
 npm-debug.log*
 yarn-debug.log*

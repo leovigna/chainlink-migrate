@@ -36,8 +36,11 @@
         "generate-types:truffle": "typechain --target=truffle-v5 --out-dir=src/types/truffle 'src/abi/*.json'",
         "generate-types:web3": "typechain --target=web3-v1 --out-dir=src/types/web3 'src/abi/*.json'",
         "generate-types:ethers": "typechain --target=ethers-v5 --out-dir=src/types/ethers 'src/abi/*.json'",
-        "ganache": "ganache-cli -b 1 --networkId 1337 --chainId 1337 -m 'repair trade mobile pizza exclude mirror present mad buyer item impose during'",
-        "docs": "solidity-docgen -i src/solidity -o docs"
+        "ganache": "ganache-cli -h 0.0.0.0 --db $(pwd)/data/ganache -b 1 --networkId 1337 --chainId 1337 -m 'repair trade mobile pizza exclude mirror present mad buyer item impose during'",
+        "docs": "solidity-docgen -i src/solidity -o docs",
+        "docker:postgres": "docker run -p 5432:5432 -it -v $(pwd)/data/postgres:/var/lib/postgresql/data -e POSTGRES_PASSWORD=EXAMPLE_POSTGRES_PASSWORD postgres:13",
+        "docker:chainlink": "docker run -p 6688:6688 -it --add-host=host.docker.internal:host-gateway -v $(pwd)/data/chainlink:/chainlink --env-file=data/chainlink/.env smartcontract/chainlink:0.10.14 local n -a /chainlink/api -p /chainlink/password",
+        "docker:explorer": "docker run -p 8080:80 -it -e APP_NODE_URL=ws://localhost:8545 alethio/ethereum-lite-explorer"
     },
     "devDependencies": {
         "@ethersproject/abi": "^5.4.0",
