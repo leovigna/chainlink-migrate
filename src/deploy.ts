@@ -4,18 +4,19 @@ import { inquireAbiInputList, inquireAddress } from '@leovigna/web3-prompt';
 import inquirer from 'inquirer';
 import { ERC677FixedSupply, Oracle, OracleTestConsumer } from './truffle';
 import { OracleTestConsumer as OracleTestConsumerWeb3 } from './web3';
-import { ZERO_ADDRESS } from '@leovigna/web3-prompt/utils';
 import {
     ACCOUNT_ADDRESS,
-    CONTRACT_LINK,
-    CONTRACT_ORACLE,
-    CONTRACT_ORACLE_TEST_CONSUMER,
+    LINK_CONTRACT_ADDRESS,
+    ORACLE_CONTRACT_ADDRESS,
+    ORACLE_TEST_CONSUMER_CONTRACT_ADDRESS,
     HD_WALLET_MNEMONIC,
     NODE_ADDRESS,
     NODE_JOB_ID,
     PRIVATE_KEYS,
     RPC_URL,
 } from './environment';
+
+const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
 
 let provider: any;
 if (HD_WALLET_MNEMONIC) {
@@ -96,7 +97,7 @@ async function main() {
         const { tokenAddress } = await inquireAddress({
             name: 'tokenAddress',
             message: 'LINK token address:',
-            default: CONTRACT_LINK ?? ZERO_ADDRESS,
+            default: LINK_CONTRACT_ADDRESS ?? ZERO_ADDRESS,
         });
         const oracle = await Oracle.new(tokenAddress);
         console.log();
@@ -106,7 +107,7 @@ async function main() {
         const { tokenAddress } = await inquireAddress({
             name: 'tokenAddress',
             message: 'LINK token address:',
-            default: CONTRACT_LINK ?? ZERO_ADDRESS,
+            default: LINK_CONTRACT_ADDRESS ?? ZERO_ADDRESS,
         });
         const oracleTestConsumer = await OracleTestConsumer.new(tokenAddress);
         console.log();
@@ -116,7 +117,7 @@ async function main() {
         const { oracleAddress } = await inquireAddress({
             name: 'oracleAddress',
             message: 'Oracle contract address:',
-            default: CONTRACT_ORACLE ?? ZERO_ADDRESS,
+            default: ORACLE_CONTRACT_ADDRESS ?? ZERO_ADDRESS,
         });
 
         //Set fulfillment permissions oracle
@@ -139,7 +140,7 @@ async function main() {
         const { oracleTestConsumerAddress } = await inquireAddress({
             name: 'oracleTestConsumerAddress',
             message: 'OracleTestConsumer contract address:',
-            default: CONTRACT_ORACLE_TEST_CONSUMER ?? ZERO_ADDRESS,
+            default: ORACLE_TEST_CONSUMER_CONTRACT_ADDRESS ?? ZERO_ADDRESS,
         });
 
         //Set fulfillment permissions oracle
@@ -147,7 +148,7 @@ async function main() {
         const { inputs: requestGetUInt256Fn } = OracleTestConsumer._json.abi.find(
             (x: any) => x.name === 'requestGetUInt256',
         );
-        requestGetUInt256Fn[0].default = CONTRACT_ORACLE ?? ZERO_ADDRESS;
+        requestGetUInt256Fn[0].default = ORACLE_CONTRACT_ADDRESS ?? ZERO_ADDRESS;
         requestGetUInt256Fn[1].default = NODE_JOB_ID ?? '00000000-0000-0000-0000-000000000000';
         requestGetUInt256Fn[3].default = 'https://www.bitstamp.net/api/ticker/';
         requestGetUInt256Fn[4].default = 'last';
@@ -178,6 +179,8 @@ async function main() {
         console.log('Awaiting events...\n');
 
         console.log(await waitRequest);
+        const latestValue = await oracleTestConsumer.latestResponseUInt256()
+        console.debug(latestValue.toString());
         console.log(await waitFullfill);
     } else if (action === 'fundNode') {
         const { nodeAddress } = await inquireAddress({
@@ -198,12 +201,12 @@ async function main() {
         const { tokenAddress } = await inquireAddress({
             name: 'tokenAddress',
             message: 'LINK token address:',
-            default: CONTRACT_LINK ?? ZERO_ADDRESS,
+            default: LINK_CONTRACT_ADDRESS ?? ZERO_ADDRESS,
         });
         const { oracleTestConsumerAddress } = await inquireAddress({
             name: 'oracleTestConsumerAddress',
             message: 'OracleTestConsumer contract address:',
-            default: CONTRACT_ORACLE_TEST_CONSUMER ?? ZERO_ADDRESS,
+            default: ORACLE_TEST_CONSUMER_CONTRACT_ADDRESS ?? ZERO_ADDRESS,
         });
 
         const token = await ERC677FixedSupply.at(tokenAddress);

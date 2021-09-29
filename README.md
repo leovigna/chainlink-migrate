@@ -57,7 +57,7 @@ DATABASE_URL= #postgres database connection
 For now, configure all files with your Eth connection info and addditional contract addresses if you're working with already deployed contracts.
 
 ### Chainlink Smart Contracts Compile
-Compile from Solidity source. Generate typescript types.
+Compile from Solidity source. Generates typescript types and also compiles deploy script.
 ```
 npm run compile
 ```
@@ -70,7 +70,7 @@ If using a local test blockchain or just looking to test out a deployment, you c
 
 Run the deploy script CLI. Feel free to pass a custom .env file to configure the deployment script.
 ```
-npm run deploy .env
+npm run deploy
 * Deploy LINK token
 ```
 This should log the deployed address. You can then update:
@@ -98,7 +98,7 @@ Your node should now be initializing the postgres database and then be idle as y
 
 Fund your node using either a wallet or run this helper command that funds 1 ETH.
 ```
-npm run deploy .env
+npm run deploy
 * Fund ETH Chainlink node
 ```
 
@@ -116,7 +116,7 @@ See more at https://docs.chain.link/docs/jobs/types/direct-request/
 ### Deploy Direct Request Contracts
 Deploy `Oracle.sol`:
 ```
-npm run deploy .env
+npm run deploy
 * Deploy Oracle contract (directrequest)
 ```
 This should log the deployed address. You can then update:
@@ -125,7 +125,7 @@ This should log the deployed address. You can then update:
 
 Deploy `OracleTestConsumer.sol`:
 ```
-npm run deploy .env
+npm run deploy
 * Deploy Oracle Test Consumer contract (directrequest)
 ```
 This should log the deployed address. You can then update:
@@ -137,12 +137,12 @@ Restart your Chainlink node to apply your changes.
 Configure the `Oracle.sol` contract to accept responses from your node and fund the `OracleTestConsumer.sol` contract.
 Set this to your Chainlink node's address.
 ```
-npm run deploy .env
+npm run deploy
 * Oracle.setFulfillmentPermission (directrequest)
 ```
 This sends 1 LINK to `OracleTestConsumer.sol`.
 ```
-npm run deploy .env
+npm run deploy
 * Fund LINK Oracle Test Consumer contract (directrequest)
 ```
 
@@ -150,7 +150,7 @@ npm run deploy .env
 We will now create a direct requests job that makes an HTTP requests, parses out the json and converts the result to a uint256.
 * Login to your Chainlink node
 * Click "New Job"
-* Copy [`httpget.toml`](./src/jobs/httpget.toml) and replace `ORACLE_ADDRESS` with the deployed `Oracle.sol` address
+* Copy [`httpget.toml`](./src/jobs/httpget.toml) and replace `ORACLE_CONTRACT_ADDRESS` with the deployed `Oracle.sol` address
 * Create the job
 
 You can then update:
@@ -158,7 +158,7 @@ You can then update:
 
 ### Trigger Direct Request
 ```
-npm run deploy .env
+npm run deploy
 * OracleTestconsumer.requestGetUInt256() (directrequest)
 ```
 

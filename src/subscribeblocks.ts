@@ -1,6 +1,6 @@
 import Web3 from 'web3';
 import Oracle from './web3/Oracle';
-import { CONTRACT_ORACLE, RPC_URL } from './environment';
+import { ORACLE_CONTRACT_ADDRESS, RPC_URL } from './environment';
 
 const web3 = new Web3(RPC_URL);
 
@@ -12,7 +12,7 @@ async function subscribeBlocks() {
 }
 
 async function subscribeOracleRequest() {
-    const oracle = Oracle(web3, CONTRACT_ORACLE);
+    const oracle = Oracle(web3, ORACLE_CONTRACT_ADDRESS);
     const waitRequest = new Promise((resolve) => {
         oracle.events.OracleRequest((error, event) => {
             resolve({ event: event.event, blockNumber: event.blockNumber, returnValues: event.returnValues });

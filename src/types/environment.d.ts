@@ -2,9 +2,9 @@ declare global {
     namespace NodeJS {
         interface ProcessEnv {
             NODE_ENV: 'development' | 'production';
-            CONTRACT_LINK: string;
-            CONTRACT_ORACLE: string;
-            CONTRACT_ORACLE_TEST_CONSUMER: string;
+            LINK_CONTRACT_ADDRESS: string;
+            ORACLE_CONTRACT_ADDRESS: string;
+            ORACLE_TEST_CONSUMER_CONTRACT_ADDRESS: string;
             NODE_ADDRESS: string;
             NODE_JOB_ID: string;
             RPC_URL: string;

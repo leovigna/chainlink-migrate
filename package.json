@@ -40,7 +40,8 @@
         "docs": "solidity-docgen -i src/solidity -o docs",
         "docker:postgres": "docker run -p 5432:5432 -it -v $(pwd)/data/postgres:/var/lib/postgresql/data -e POSTGRES_PASSWORD=EXAMPLE_POSTGRES_PASSWORD postgres:13",
         "docker:chainlink": "docker run -p 6688:6688 -it --add-host=host.docker.internal:host-gateway -v $(pwd)/data/chainlink:/chainlink --env-file=data/chainlink/.env smartcontract/chainlink:0.10.14 local n -a /chainlink/api -p /chainlink/password",
-        "docker:explorer": "docker run -p 8080:80 -it -e APP_NODE_URL=ws://localhost:8545 alethio/ethereum-lite-explorer"
+        "docker:explorer": "docker run -p 8080:80 -it -e APP_NODE_URL=ws://localhost:8545 alethio/ethereum-lite-explorer",
+        "deploy": "node lib/deploy.js"
     },
     "devDependencies": {
         "@ethersproject/abi": "^5.4.0",
@@ -78,6 +79,7 @@
         "solidity-docgen": "^0.5.13",
         "truffle": "^5.4.3",
         "truffle-assertions": "^0.9.2",
+        "ts-node": "^10.2.1",
         "typechain": "^5.1.2",
         "typescript": "^4.3.5",
         "web3": "^1.5.2",

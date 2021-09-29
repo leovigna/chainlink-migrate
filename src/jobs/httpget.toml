@@ -11,7 +11,7 @@ observationSource = """
     decode_cbor [type="cborparse"
                 data="$(decode_log.cborPayload)"]
 
-    fetch [type="http" url="$(decode_cbor.get)" method="get"]
+    fetch [type="http" url="$(decode_cbor.url)" method="get"]
     parse [type="jsonparse" path="$(decode_cbor.path)" data="$(fetch)"]
     multiply [type="multiply" input="$(parse)" times="$(decode_cbor.times)"]
 

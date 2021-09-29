@@ -8,10 +8,9 @@ const envfile = path.resolve(process.cwd(), envfileName);
 
 dotenv.config({ path: envfile });
 
-export const CONTRACT_LINK = process.env.CONTRACT_LINK || process.env.LINK_CONTRACT_ADDRESS;
-export const CONTRACT_ORACLE = process.env.CONTRACT_ORACLE || process.env.ORACLE_CONTRACT_ADDRESS;
-export const CONTRACT_ORACLE_TEST_CONSUMER =
-    process.env.CONTRACT_ORACLE_TEST_CONSUMER || process.env.ORACLE_TEST_CONSUMER_CONTRACT_ADDRESS;
+export const LINK_CONTRACT_ADDRESS = process.env.LINK_CONTRACT_ADDRESS;
+export const ORACLE_CONTRACT_ADDRESS = process.env.ORACLE_CONTRACT_ADDRESS;
+export const ORACLE_TEST_CONSUMER_CONTRACT_ADDRESS = process.env.ORACLE_TEST_CONSUMER_CONTRACT_ADDRESS;
 export const NODE_ADDRESS = process.env.NODE_ADDRESS;
 export const NODE_JOB_ID = process.env.NODE_JOB_ID;
 export const RPC_URL = process.env.RPC_URL;

@@ -32,7 +32,7 @@ contract OracleTestConsumer is IOracleTestConsumer, ChainlinkClient, Ownable {
             address(this),
             this.fulfillUInt256.selector
         );
-        req.add('get', url);
+        req.add('url', url);
         req.add('path', path);
         req.addInt('times', times);
         requestId = sendChainlinkRequestTo(oracle, req, payment);
